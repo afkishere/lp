@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pantofi din Piele Naturală – Landing</title>
+<style>
+  :root{
+    --bg: #fff3ea;          /* peachy page background like screenshot */
+    --card: #ffffff;        /* white cards */
+    --ink: #1f2937;         /* dark gray text */
+    --muted: #6b7280;       /* secondary text */
+    --accent: #ff7a45;      /* orange headings/ribbons */
+    --accent-2:#ff986b;     /* lighter orange for gradient */
+    --cta: #12b76a;         /* green CTA */
+    --cta-2:#0ea15d;        /* darker green hover */
+    --line:#f2e7dd;         /* soft separators */
+    --shadow: 0 6px 18px rgba(17,24,39,.08);
+    --radius: 16px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);line-height:1.35}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:430px;margin:0 auto}
+  /* Top promo ribbon */
+  .promo{
+    background: linear-gradient(90deg,var(--accent),var(--accent-2));
+    color:#fff;font-weight:700;font-size:14px;text-align:center;padding:10px 12px;position:sticky;top:0;z-index:40;
+  }
+  /* Header */
+  .hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+  .brand{display:flex;align-items:center;gap:10px}
+  .logo-badge{width:34px;height:34px;border-radius:10px;background:#111;color:#fff;display:grid;place-items:center;font-weight:800}
+  .brand-name{font-weight:800;letter-spacing:.2px}
+  .hdr .pill{border:1px solid #e5e7eb;border-radius:999px;padding:8px 12px;background:#fff;font-weight:600}
+  .hamb{width:38px;height:38px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;display:grid;place-items:center}
+  .hamb span{width:18px;height:2px;background:#111;display:block;position:relative}
+  .hamb span:before,.hamb span:after{content:"";position:absolute;left:0;right:0;height:2px;background:#111}
+  .hamb span:before{top:-6px}.hamb span:after{top:6px}
+
+  /* Hero */
+  .hero{padding:0 16px 8px}
+  .hero h1{margin:6px 0 4px;color:var(--accent);font-size:34px;line-height:1.05;font-weight:900;letter-spacing:.2px}
+  .hero p{margin:0;color:var(--muted);font-weight:600}
+  .prod-shot{
+    margin:14px auto 10px;width:88%;aspect-ratio:1/1;border-radius:24px;
+    background: radial-gradient(70% 70% at 50% 45%, #ffd7bf, #f6b492);
+    display:grid;place-items:center;box-shadow:var(--shadow)
+  }
+  .prod-shot img{max-width:78%;height:auto;filter:drop-shadow(0 14px 22px rgba(0,0,0,.18));border-radius:18px}
+
+  /* Stats strip (like 90 chews / 100% etc) */
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:10px 12px}
+  .stat{background:#ffe7da;border-radius:14px;padding:10px 6px;text-align:center}
+  .stat b{display:block;font-size:14px}
+  .stat small{display:block;font-size:11px;color:#9a6a54;font-weight:600}
+
+  /* Orange sale bar */
+  .sale-bar{
+    margin:8px 16px 10px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    color:#fff;font-weight:800;font-size:12.5px;padding:10px 12px;text-align:center;letter-spacing:.2px
+  }
+
+  /* Avatars row */
+  .avatars{display:flex;gap:10px;align-items:center;padding:0 16px 6px}
+  .av{width:42px;height:42px;border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:800}
+  .av:nth-child(1){background:#f97316}.av:nth-child(2){background:#ef4444}.av:nth-child(3){background:#22c55e}.av:nth-child(4){background:#06b6d4}.av:nth-child(5){background:#a855f7}
+
+  /* Title & copy */
+  .copy{padding:6px 16px 0}
+  .eyebrow{color:#ff6a2b;font-weight:800;font-size:12px;margin-bottom:6px}
+  .title{font-weight:900;font-size:22px;margin:0 0 4px}
+  .rating{color:#f59e0b;font-weight:800}
+  .desc{color:var(--muted);margin:6px 0 12px}
+
+  /* Green order-by pill */
+  .deadline{
+    margin:0 16px 12px;background:#e8fff3;border:1px solid #bdf3d3;color:#0a8f55;font-weight:800;
+    border-radius:999px;padding:10px 14px;text-align:center
+  }
+
+  /* Cards */
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line);margin:12px 16px;padding:14px}
+  .card h3{margin:0 0 8px;font-size:16px;font-weight:900}
+  .subtle{color:var(--muted);font-weight:700}
+
+  /* Package selector */
+  .packs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+  .pack{
+    position:relative;border:2px solid #eee;border-radius:14px;padding:12px;background:#fff;cursor:pointer
+  }
+  .pack input{display:none}
+  .pack .k{font-weight:900}
+  .pack .p{font-weight:900}
+  .pack .u{color:var(--muted);font-size:12px}
+  .pack.active{border-color:#ffb290;background:#fff7f2}
+  .ribbon{
+    position:absolute;top:-10px;left:-8px;background:var(--accent);color:#fff;font-weight:900;font-size:11px;
+    padding:5px 8px;border-radius:8px
+  }
+
+  /* Subscribe & Save */
+  .checklist{display:grid;gap:8px;margin-top:10px}
+  .li{display:flex;gap:8px;align-items:flex-start}
+  .li .tick{width:18px;height:18px;border-radius:4px;background:#e9f8ef;border:1px solid #bdebd0;display:grid;place-items:center;font-weight:900;color:#10a164}
+
+  /* CTA card */
+  .cta-card .row{display:flex;align-items:center;justify-content:space-between;margin:6px 0 12px}
+  .price-big{font-weight:900;font-size:20px}
+  .strike{color:#a8a8a8;text-decoration:line-through;font-weight:800;margin-left:8px}
+  .cta-btn{
+    width:100%;border:none;border-radius:999px;background:var(--cta);color:#fff;font-weight:900;
+    padding:16px 18px;font-size:18px;cursor:pointer;box-shadow:0 10px 18px rgba(18,183,106,.22)
+  }
+  .cta-btn:hover{background:var(--cta-2)}
+  .ship-note{margin-top:8px;text-align:center;font-weight:800;font-size:12px;color:#16a34a}
+
+  /* Footer badges */
+  .badges{display:flex;justify-content:center;gap:8px;margin:8px 0 26px}
+  .badge{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:6px 10px;font-weight:800;font-size:12px;box-shadow:var(--shadow)}
+
+  /* Utility */
+  .row-split{display:flex;align-items:center;justify-content:space-between}
+  .tiny{font-size:12px}
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- Promo ribbon -->
+    <div class="promo">Get 20% Off This Weekend With Code: <b>PANTOF20</b></div>
+
+    <!-- Header -->
+    <header class="hdr">
+      <div class="brand">
+        <div class="logo-badge">WB</div>
+        <div class="brand-name"><span style="font-weight:700">ePieleNaturala</span></div>
+      </div>
+      <a class="pill" href="#">Shop All</a>
+      <div class="hamb" aria-label="menu"><span></span></div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Save up to 26%</h1>
+      <p>With today’s subscribe &amp; save offer</p>
+
+      <div class="prod-shot">
+        <img src="https://cdn13.avanticart.ro/epielenaturala.ro/large_pictures/10157875_94546.jpeg" alt="Pantofi din piele naturală" />
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat"><b>100%</b><small>Piele naturală</small></div>
+      <div class="stat"><b>🪶</b><small>Talpă ușoară</small></div>
+      <div class="stat"><b>🧵</b><small>Piele moale</small></div>
+      <div class="stat"><b>↔</b><small>Schimb mărime</small></div>
+      <div class="stat"><b>↩</b><small>Retur gratuit</small></div>
+    </div>
+
+    <!-- Orange sale bar -->
+    <div class="sale-bar">EXCLUSIVE SALE · FREE Gifts with First Order</div>
+
+    <!-- Avatars -->
+    <div class="avatars">
+      <div class="av">HP</div>
+      <div class="av">SE</div>
+      <div class="av">AV</div>
+      <div class="av">CR</div>
+      <div class="av">TR</div>
+    </div>
+
+    <!-- Copy -->
+    <div class="copy">
+      <div class="eyebrow">Susțin confortul și flexibilitatea piciorului</div>
+      <h2 class="title">Pantofi din Piele Naturală – Comozi pentru Zi de Zi</h2>
+      <div class="tiny"><span class="rating">★★★★★ 4.8</span> · 3.000+ recenzii verificate</div>
+      <p class="desc">
+        Piele naturală premium care respiră, talpă ușoară și flexibilă, se mulează delicat pe picior.
+        Schimb de mărime gratuit și retur gratuit — fără griji.
+      </p>
+    </div>
+
+    <!-- Deadline pill -->
+    <div class="deadline">Comandă până pe <b>5 Sept</b> pentru <b>RETUR &amp; SCHIMB GRATUITE</b> garantate.</div>
+
+    <!-- One-time purchase card (package selector) -->
+    <section class="card" id="one-time-card">
+      <div class="row-split">
+        <h3>Alege pachetul</h3>
+        <div class="subtle">One Time Purchase</div>
+      </div>
+
+      <div class="packs" id="packs">
+        <!-- BEST DEAL -->
+        <label class="pack active" data-qty="1" data-price="249">
+          <input type="radio" name="pack" checked />
+          <div class="ribbon">BEST DEAL</div>
+          <div class="k">1 Pereche</div>
+          <div class="p">249 lei</div>
+          <div class="u">~249 lei / pereche</div>
+        </label>
+
+        <label class="pack" data-qty="2" data-price="469">
+          <input type="radio" name="pack" />
+          <div class="k">2 Perechi</div>
+          <div class="p">469 lei</div>
+          <div class="u">234.5 lei / pereche</div>
+        </label>
+
+        <label class="pack" data-qty="3" data-price="669">
+          <input type="radio" name="pack" />
+          <div class="k">3 Perechi</div>
+          <div class="p">669 lei</div>
+          <div class="u">223 lei / pereche</div>
+        </label>
+
+        <label class="pack" data-qty="4" data-price="876">
+          <input type="radio" name="pack" />
+          <div class="k">4 Perechi</div>
+          <div class="p">876 lei</div>
+          <div class="u">219 lei / pereche</div>
+        </label>
+      </div>
+    </section>
+
+    <!-- Subscribe & Save (kept for identical order/layout) -->
+    <section class="card" id="sub-card">
+      <div class="row-split">
+        <h3>Subscribe &amp; Save</h3>
+        <div class="subtle">Aplică <b>−20%</b> la total</div>
+      </div>
+      <div class="checklist">
+        <div class="li"><div class="tick">✓</div><div>Economisești <b>20%</b> la fiecare comandă</div></div>
+        <div class="li"><div class="tick">✓</div><div>Livrare lunară (poți întrerupe oricând)</div></div>
+        <div class="li"><div class="tick">✓</div><div>Schimb mărime &amp; retur ușor</div></div>
+        <div class="li"><div class="tick">✓</div><div>Transport rapid</div></div>
+      </div>
+      <div style="margin-top:10px;display:flex;align-items:center;gap:10px">
+        <input id="subscribe" type="checkbox" style="width:18px;height:18px" />
+        <label for="subscribe" class="subtle">Activează reducerea Subscribe &amp; Save (−20%)</label>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="card cta-card">
+      <div class="row">
+        <div class="subtle">Total</div>
+        <div class="price">
+          <span class="strike" id="strike">299 lei</span>
+          <span class="price-big" id="total">249 lei</span>
+        </div>
+      </div>
+      <button class="cta-btn" id="cta">Adaugă în coș – 249 lei</button>
+      <div class="ship-note">🚚 LIVRARE GRATUITĂ la comenzi peste 300 lei</div>
+    </section>
+
+    <!-- Footer trust badges -->
+    <div class="badges">
+      <div class="badge">Apple Pay</div>
+      <div class="badge">Google Pay</div>
+      <div class="badge">VISA</div>
+      <div class="badge">MASTERCARD</div>
+    </div>
+
+  </div>
+
+<script>
+  // Simple price updater to mirror the screenshot behavior
+  (function(){
+    const packEls = Array.from(document.querySelectorAll('.pack'));
+    const strike = document.getElementById('strike');
+    const total = document.getElementById('total');
+    const cta = document.getElementById('cta');
+    const sub = document.getElementById('subscribe');
+
+    const MSRP = 299; // shown as crossed-out reference price for a single pair
+
+    function activePack(){
+      return packEls.find(el => el.classList.contains('active')) || packEls[0];
+    }
+
+    function update(){
+      const p = activePack();
+      const base = Number(p.dataset.price || 0);
+      const subOn = sub.checked;
+      const out = Math.round((subOn ? base * 0.8 : base));
+      total.textContent = out + ' lei';
+      cta.textContent = 'Adaugă în coș – ' + out + ' lei';
+      // keep strike only when selected base >= 249 (mirrors “save up to” feel)
+      strike.style.visibility = 'visible';
+      // Optional: emulate a higher crossed-out total for multi-packs
+      const msrp = Math.round((MSRP * Number(p.dataset.qty)) * (subOn ? 0.9 : 1));
+      strike.textContent = msrp + ' lei';
+    }
+
+    packEls.forEach(el=>{
+      el.addEventListener('click', ()=>{
+        packEls.forEach(x=>x.classList.remove('active'));
+        el.classList.add('active');
+        update();
+      });
+    });
+
+    document.getElementById('subscribe').addEventListener('change', update);
+    update();
+  })();
+</script>
+</body>
+</html>
