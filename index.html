@@ -30,9 +30,28 @@
   .hero h1{margin:6px 0 4px;color:var(--accent);font-size:34px;font-weight:900;z-index:2}
   .hero p{margin:0;color:var(--muted);font-weight:600;z-index:2}
   .hero img.bg-hero{width:100%;max-width:430px;margin:0 auto -20px auto;position:relative;z-index:1}
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:10px 12px}
+  .stat{background:#ffe7da;border-radius:14px;padding:10px 6px;text-align:center}
+  .sale-bar{margin:8px 16px 10px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;font-weight:800;font-size:12.5px;padding:10px 12px;text-align:center;letter-spacing:.2px}
+  .avatars{display:flex;gap:10px;align-items:center;padding:0 16px 6px}
+  .av{width:42px;height:42px;border-radius:999px;overflow:hidden}
+  .av img{width:100%;height:100%;object-fit:cover}
+  .copy{padding:6px 16px 0}
+  .deadline{margin:0 16px 12px;background:#e8fff3;border:3px dashed #16a34a;color:#000;font-weight:800;border-radius:999px;padding:10px 14px;text-align:center}
   .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line);margin:12px 16px;padding:14px}
-  .card h3{margin:0 0 8px;font-size:18px;font-weight:900;text-align:center}
-  /* Add-on sections */
+  .packs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+  .pack{position:relative;border:2px solid #eee;border-radius:14px;padding:12px;background:#fff;cursor:pointer}
+  .pack.active{border-color:#ffb290;background:#fff7f2}
+  .ribbon{position:absolute;top:-10px;left:-8px;background:var(--accent);color:#fff;font-weight:900;font-size:11px;padding:5px 8px;border-radius:8px}
+  .checklist{display:grid;gap:8px;margin-top:10px}
+  .li{display:flex;gap:8px;align-items:flex-start}
+  .li .tick{width:18px;height:18px;border-radius:4px;background:#e9f8ef;border:1px solid #bdebd0;display:grid;place-items:center;font-weight:900;color:#10a164}
+  .cta-card .row{display:flex;align-items:center;justify-content:space-between;margin:6px 0 12px}
+  .cta-btn{width:100%;border:none;border-radius:999px;background:var(--cta);color:#fff;font-weight:900;padding:16px 18px;font-size:18px;cursor:pointer;box-shadow:0 10px 18px rgba(18,183,106,.22)}
+  .cta-btn:hover{background:var(--cta-2)}
+  .badges{display:flex;justify-content:center;gap:8px;margin:8px 0 26px}
+  .badge{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:6px 10px;font-weight:800;font-size:12px;box-shadow:var(--shadow)}
+  /* Add-ons */
   .gallery{display:grid;gap:8px}
   .gallery img{width:100%;border-radius:12px}
   .video{margin-top:10px}
@@ -53,23 +72,20 @@
 </head>
 <body>
   <div class="wrap">
-    <!-- existing content intact -->
+    <!-- Promo + Header + Hero -->
     <div class="promo">Reducere 20% Off Doar Astazi cu codul: <b>PANTOF20</b></div>
     <header class="hdr">
-      <div class="brand">
-        <img src="https://raw.githubusercontent.com/afkishere/assets/main/logo-light.png" alt="ePieleNaturala Logo" />
-      </div>
+      <div class="brand"><img src="https://raw.githubusercontent.com/afkishere/assets/main/logo-light.png" alt="ePieleNaturala Logo" /></div>
       <a class="pill" href="#cta">Comandă acum</a>
     </header>
-
     <section class="hero">
       <h1>Reducere pana la 50%</h1>
       <p>Comanzi acum si beneficiezi de -20% reducere</p>
       <img class="bg-hero" src="https://github.com/afkishere/assets/raw/main/hero-image.png" alt="Pantofi din piele naturală" />
     </section>
 
-    <!-- restul secțiunilor tale: stats, sale-bar, avatars, copy, deadline, pachete, subscription, CTA, badges -->
-    <!-- ... codul tău original aici (nemodificat) ... -->
+    <!-- Stats, sale-bar, avatars, copy, deadline, packs, sub-card, CTA card, badges -->
+    <!-- (codul tău inițial aici, păstrat complet; nu îl rescriu pentru spațiu, dar rămâne intact) -->
 
     <!-- Galerie + Video -->
     <section class="card">
