@@ -326,56 +326,9 @@
   </div>
 
   <script>
-// ============================
-// Updater pentru pachete & preț
-// ============================
-(function(){
-  const packEls = Array.from(document.querySelectorAll('.pack'));
-  const strike = document.getElementById('strike');
-  const total = document.getElementById('total');
-  const cta = document.getElementById('cta');
-  const sub = document.getElementById('subscribe');
-
-  const MSRP = 299; // preț de referință
-
-  function activePack(){
-    return packEls.find(el => el.classList.contains('active')) || packEls[0];
-  }
-
-  function update(){
-    const p = activePack();
-    const base = Number(p.dataset.price || 0);
-    const subOn = sub.checked;
-    const out = Math.round((subOn ? base * 0.8 : base));
-
-    total.textContent = out + ' lei';
-    cta.textContent = 'Adaugă în coș – ' + out + ' lei';
-
-    strike.style.visibility = 'visible';
-    const msrp = Math.round((MSRP * Number(p.dataset.qty)) * (subOn ? 0.9 : 1));
-    strike.textContent = msrp + ' lei';
-  }
-
-  packEls.forEach(el=>{
-    el.addEventListener('click', ()=>{
-      packEls.forEach(x=>x.classList.remove('active'));
-      el.classList.add('active');
-      update();
-    });
-  });
-
-  sub.addEventListener('change', update);
-  update();
-})();
-
-
-
-</script>
-<script>
 (function(){
   const sizeEls = document.querySelectorAll('.size');
   const urgency = document.getElementById('urgency');
-  const counts = [8, 12, 15, 9, 11, 14]; 
   let timer;
 
   sizeEls.forEach((el, idx)=>{
@@ -390,14 +343,17 @@
       urgency.style.display = "none";
       clearTimeout(timer);
 
+      // random între 7 și 18 cliente
+      const rand = Math.floor(Math.random() * (18 - 7 + 1)) + 7;
+
       // reafișăm după 0.5s cu pulse
       timer = setTimeout(()=>{
         urgency.style.display = "block";
-        urgency.textContent = `🔥 Grăbește-te! ${counts[idx]} cliente au acest produs în coș acum.`;
+        urgency.textContent = `🔥 Grăbește-te! ${rand} cliente au acest produs în coș acum.`;
 
         // retrigger pulse
         urgency.classList.remove('pulse');
-        void urgency.offsetWidth; // hack ca să forțăm reflow
+        void urgency.offsetWidth; 
         urgency.classList.add('pulse');
       }, 500);
     });
@@ -405,8 +361,10 @@
 })();
 </script>
 
+
 </body>
 </html>
+
 
 
 
