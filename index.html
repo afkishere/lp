@@ -112,6 +112,13 @@
   margin-top: 10px;
 }
 
+.sizes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
 .size {
   border: 2px solid #eee;
   border-radius: 12px;
@@ -124,13 +131,12 @@
   transition: all .2s ease;
 }
 .size input { display: none; }
-.size.active, .size:hover {
+.size.active {
   border-color: var(--accent);
   background: #fff7f2;
   color: var(--accent);
   box-shadow: var(--shadow);
 }
-
 
 .urgency {
   margin-top: 14px;
@@ -140,16 +146,15 @@
   color: #b91c1c;
   display: none;
 }
-
 .pulse {
   animation: pulse 1.2s ease-in-out 2;
 }
-
 @keyframes pulse {
   0% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.08); opacity: 0.85; }
   100% { transform: scale(1); opacity: 1; }
 }
+
 
 </style>
 </head>
@@ -259,6 +264,8 @@
   </div>
   <div class="urgency" id="urgency" style="display:none;"></div>
 </section>
+
+    
 <section class="card" id="sub-card">
       <div class="row-split">
         <h3>Comandă acum</h3>
@@ -367,15 +374,18 @@
 (function(){
   const sizeEls = document.querySelectorAll('.size');
   const urgency = document.getElementById('urgency');
-  const counts = [8, 12, 15, 9, 11, 14]; // nr. random per mărime
+  const counts = [8, 12, 15, 9, 11, 14]; 
   let timer;
 
   sizeEls.forEach((el, idx)=>{
     el.addEventListener('click', ()=>{
+      // scoate active de pe toate
       sizeEls.forEach(x=>x.classList.remove('active'));
+      // pune active pe cel selectat
       el.classList.add('active');
+      el.querySelector('input').checked = true;
 
-      // ascunde mesajul & oprește timerul anterior
+      // ascunde mesajul și oprește timerul anterior
       urgency.style.display = "none";
       clearTimeout(timer);
 
@@ -386,16 +396,18 @@
 
         // retrigger pulse
         urgency.classList.remove('pulse');
-        void urgency.offsetWidth; // hack pentru restart animație
+        void urgency.offsetWidth; 
         urgency.classList.add('pulse');
       }, 500);
     });
   });
 })();
+
 </script>
 
 </body>
 </html>
+
 
 
 
