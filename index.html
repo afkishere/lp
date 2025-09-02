@@ -368,9 +368,10 @@
   update();
 })();
 
-// ============================
-// Selector mărimi + urgency
-// ============================
+
+
+</script>
+<script>
 (function(){
   const sizeEls = document.querySelectorAll('.size');
   const urgency = document.getElementById('urgency');
@@ -379,34 +380,34 @@
 
   sizeEls.forEach((el, idx)=>{
     el.addEventListener('click', ()=>{
-      // scoate active de pe toate
+      // scoatem .active de pe toate
       sizeEls.forEach(x=>x.classList.remove('active'));
-      // pune active pe cel selectat
+      // marcăm selecția curentă
       el.classList.add('active');
       el.querySelector('input').checked = true;
 
-      // ascunde mesajul și oprește timerul anterior
+      // ascunde imediat mesajul dacă era afișat
       urgency.style.display = "none";
       clearTimeout(timer);
 
-      // afișează cu delay
+      // reafișăm după 0.5s cu pulse
       timer = setTimeout(()=>{
         urgency.style.display = "block";
         urgency.textContent = `🔥 Grăbește-te! ${counts[idx]} cliente au acest produs în coș acum.`;
 
         // retrigger pulse
         urgency.classList.remove('pulse');
-        void urgency.offsetWidth; 
+        void urgency.offsetWidth; // hack ca să forțăm reflow
         urgency.classList.add('pulse');
       }, 500);
     });
   });
 })();
-
 </script>
 
 </body>
 </html>
+
 
 
 
