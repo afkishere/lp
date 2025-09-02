@@ -112,13 +112,6 @@
   margin-top: 10px;
 }
 
-.sizes {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 10px;
-}
-
 .size {
   border: 2px solid #eee;
   border-radius: 12px;
@@ -129,6 +122,7 @@
   cursor: pointer;
   background: #fff;
   transition: all .2s ease;
+  position: relative;
 }
 .size input { display: none; }
 .size.active {
@@ -136,6 +130,21 @@
   background: #fff7f2;
   color: var(--accent);
   box-shadow: var(--shadow);
+}
+.size .stock {
+  display: none;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #16a34a;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.size.active .stock {
+  display: inline-block;
 }
 
 .urgency {
@@ -249,36 +258,40 @@
       </div>
     </section>
 
- <section class="card" id="size-card">
-  <h3 style="text-align:center;margin-bottom:12px;">Alege mărimea ta</h3>
-  <div class="sizes" id="sizes">
-    <label class="size" data-size="36">
-      <input type="radio" name="size" />
-      <span>36</span>
-    </label>
-    <label class="size" data-size="37">
-      <input type="radio" name="size" />
-      <span>37</span>
-    </label>
-    <label class="size" data-size="38">
-      <input type="radio" name="size" />
-      <span>38</span>
-    </label>
-    <label class="size" data-size="39">
-      <input type="radio" name="size" />
-      <span>39</span>
-    </label>
-    <label class="size" data-size="40">
-      <input type="radio" name="size" />
-      <span>40</span>
-    </label>
-    <label class="size" data-size="41">
-      <input type="radio" name="size" />
-      <span>41</span>
-    </label>
-  </div>
-  <div class="urgency" id="urgency" style="display:none;"></div>
-</section>
+ <div class="sizes" id="sizes">
+  <label class="size" data-size="36">
+    <input type="radio" name="size" />
+    <span>36</span>
+    <span class="stock">✔ În stoc</span>
+  </label>
+  <label class="size" data-size="37">
+    <input type="radio" name="size" />
+    <span>37</span>
+    <span class="stock">✔ În stoc</span>
+  </label>
+  <label class="size" data-size="38">
+    <input type="radio" name="size" />
+    <span>38</span>
+    <span class="stock">✔ În stoc</span>
+  </label>
+  <label class="size" data-size="39">
+    <input type="radio" name="size" />
+    <span>39</span>
+    <span class="stock">✔ În stoc</span>
+  </label>
+  <label class="size" data-size="40">
+    <input type="radio" name="size" />
+    <span>40</span>
+    <span class="stock">✔ În stoc</span>
+  </label>
+  <label class="size" data-size="41">
+    <input type="radio" name="size" />
+    <span>41</span>
+    <span class="stock">✔ În stoc</span>
+  </label>
+</div>
+<div class="urgency" id="urgency" style="display:none;"></div>
+
 
     
 
@@ -329,32 +342,40 @@
 (function(){
   const sizeEls = document.querySelectorAll('.size');
   const urgency = document.getElementById('urgency');
-  let timer;
+  let timer, counterTimer;
 
-  sizeEls.forEach((el, idx)=>{
+  sizeEls.forEach((el)=>{
     el.addEventListener('click', ()=>{
-      // scoatem .active de pe toate
+      // reset selecție
       sizeEls.forEach(x=>x.classList.remove('active'));
-      // marcăm selecția curentă
       el.classList.add('active');
       el.querySelector('input').checked = true;
 
-      // ascunde imediat mesajul dacă era afișat
+      // ascunde imediat urgency și oprește timerele anterioare
       urgency.style.display = "none";
       clearTimeout(timer);
+      clearInterval(counterTimer);
 
-      // random între 7 și 18 cliente
-      const rand = Math.floor(Math.random() * (18 - 7 + 1)) + 7;
-
-      // reafișăm după 0.5s cu pulse
+      // delay 0.5s și afișare urgency
       timer = setTimeout(()=>{
-        urgency.style.display = "block";
-        urgency.textContent = `🔥 Grăbește-te! ${rand} cliente au acest produs în coș acum.`;
+        // număr random între 12–18 cliente
+        let count = Math.floor(Math.random() * (18 - 12 + 1)) + 12;
 
-        // retrigger pulse
+        urgency.style.display = "block";
+        urgency.textContent = `🔥 Grăbește-te! ${count} cliente au acest produs în coș acum.`;
+
+        // pulse effect
         urgency.classList.remove('pulse');
-        void urgency.offsetWidth; 
+        void urgency.offsetWidth;
         urgency.classList.add('pulse');
+
+        // counter care scade la fiecare 2s
+        counterTimer = setInterval(()=>{
+          if(count > 7){
+            count--;
+            urgency.textContent = `🔥 Grăbește-te! ${count} cliente au acest produs în coș acum.`;
+          }
+        }, 2000);
       }, 500);
     });
   });
@@ -362,8 +383,10 @@
 </script>
 
 
+
 </body>
 </html>
+
 
 
 
