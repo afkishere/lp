@@ -105,6 +105,40 @@
   .footer{text-align:center;font-size:13px;color:var(--muted);margin:24px 0}
   .footer a{color:var(--ink);font-weight:600}
   .trust{margin-top:10px;display:flex;justify-content:center;gap:16px;font-size:12px;color:var(--ink);font-weight:700}
+  .sizes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.size {
+  border: 2px solid #eee;
+  border-radius: 12px;
+  text-align: center;
+  padding: 14px 0;
+  font-weight: 900;
+  font-size: 16px;
+  cursor: pointer;
+  background: #fff;
+  transition: all .2s ease;
+}
+.size input { display: none; }
+.size.active, .size:hover {
+  border-color: var(--accent);
+  background: #fff7f2;
+  color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.urgency {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #b91c1c;
+}
+
 </style>
 </head>
 <body>
@@ -151,39 +185,37 @@
 
     <div class="deadline">Comandă <b>astăzi</b> si beneficiezi de <b>RETUR &amp; SCHIMB GRATUIT</b> garantat.</div>
 
-    <section class="card" id="one-time-card">
-      <div class="row-split">
-        <h3>Alege pachetul...</h3>
-        <div class="subtle">...cel mai potrivi</div>
-      </div>
-      <div class="packs" id="packs">
-        <label class="pack active" data-qty="1" data-price="249">
-          <input type="radio" name="pack" checked />
-          <div class="ribbon">Cea mai buna oferta</div>
-          <div class="k">1 Pereche</div>
-          <div class="p">249 lei</div>
-          <div class="u">~249 lei / pereche</div>
-        </label>
-        <label class="pack" data-qty="2" data-price="469">
-          <input type="radio" name="pack" />
-          <div class="k">2 Perechi</div>
-          <div class="p">469 lei</div>
-          <div class="u">234.5 lei / pereche</div>
-        </label>
-        <label class="pack" data-qty="3" data-price="669">
-          <input type="radio" name="pack" />
-          <div class="k">3 Perechi</div>
-          <div class="p">669 lei</div>
-          <div class="u">223 lei / pereche</div>
-        </label>
-        <label class="pack" data-qty="4" data-price="876">
-          <input type="radio" name="pack" />
-          <div class="k">4 Perechi</div>
-          <div class="p">876 lei</div>
-          <div class="u">219 lei / pereche</div>
-        </label>
-      </div>
-    </section>
+    <section class="card" id="size-card">
+  <h3 style="text-align:center;margin-bottom:12px;">Alege mărimea ta</h3>
+  <div class="sizes" id="sizes">
+    <label class="size active" data-size="36">
+      <input type="radio" name="size" checked />
+      <span>36</span>
+    </label>
+    <label class="size" data-size="37">
+      <input type="radio" name="size" />
+      <span>37</span>
+    </label>
+    <label class="size" data-size="38">
+      <input type="radio" name="size" />
+      <span>38</span>
+    </label>
+    <label class="size" data-size="39">
+      <input type="radio" name="size" />
+      <span>39</span>
+    </label>
+    <label class="size" data-size="40">
+      <input type="radio" name="size" />
+      <span>40</span>
+    </label>
+    <label class="size" data-size="41">
+      <input type="radio" name="size" />
+      <span>41</span>
+    </label>
+  </div>
+  <div class="urgency" id="urgency">🔥 Grăbește-te! 12 cliente au acest produs în coș acum.</div>
+</section>
+
 
     <section class="card" id="sub-card">
       <div class="row-split">
@@ -253,6 +285,9 @@
       </details>
     </section>
 
+
+
+    
     <!-- Footer -->
     <div class="footer">
       © 2025 ePieleNaturala.ro<br/>
@@ -265,7 +300,22 @@
       </div>
     </div>
   </div>
+
+  <script> // Simple price updater to mirror the screenshot behavior (function(){ const packEls = Array.from(document.querySelectorAll('.pack')); const strike = document.getElementById('strike'); const total = document.getElementById('total'); const cta = document.getElementById('cta'); const sub = document.getElementById('subscribe'); const MSRP = 299; // shown as crossed-out reference price for a single pair function activePack(){ return packEls.find(el => el.classList.contains('active')) || packEls[0]; } function update(){ const p = activePack(); const base = Number(p.dataset.price || 0); const subOn = sub.checked; const out = Math.round((subOn ? base * 0.8 : base)); total.textContent = out + ' lei'; cta.textContent = 'Adaugă în coș – ' + out + ' lei'; // keep strike only when selected base >= 249 (mirrors “save up to” feel) strike.style.visibility = 'visible'; // Optional: emulate a higher crossed-out total for multi-packs const msrp = Math.round((MSRP * Number(p.dataset.qty)) * (subOn ? 0.9 : 1)); strike.textContent = msrp + ' lei'; } packEls.forEach(el=>{ el.addEventListener('click', ()=>{ packEls.forEach(x=>x.classList.remove('active')); el.classList.add('active'); update(); }); }); document.getElementById('subscribe').addEventListener('change', update); update(); })(); (function(){
+  const sizeEls = document.querySelectorAll('.size');
+  const urgency = document.getElementById('urgency');
+  const counts = [8, 12, 15, 9, 11, 14]; // nr. random pe mărimi
+
+  sizeEls.forEach((el, idx)=>{
+    el.addEventListener('click', ()=>{
+      sizeEls.forEach(x=>x.classList.remove('active'));
+      el.classList.add('active');
+      urgency.textContent = `🔥 Grăbește-te! ${counts[idx]} cliente au acest produs în coș acum.`;
+    });
+  });
+})();</script>
 </body>
 </html>
+
 
 
