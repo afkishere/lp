@@ -55,8 +55,21 @@
   .rating{color:#f59e0b;font-weight:800}
   .desc{color:var(--muted);margin:6px 0 12px}
 
-  .deadline{margin:0 16px 12px;background:#e8fff3;border:3px dashed #16a34a;color:#000;font-weight:800;border-radius:999px;padding:10px 14px;text-align:center}
-  .deadline b{color:#0a8f55;}
+  
+  .deadline {
+  margin: 0 16px 12px;
+  background: transparent; /* Schimbat fundalul în transparent */
+  border: 3px dashed #ff8c00; /* Culoare portocalie */
+  color: #000;
+  font-weight: 800;
+  border-radius: 8px; /* O formă mai pătrățoasă, cu colțuri rotunjite */
+  padding: 10px 14px;
+  text-align: center;
+}
+
+.deadline b {
+  color: #ff8c00; /* Schimbat culoarea textului bold în portocaliu */
+}
 
   .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line);margin:12px 16px;padding:14px}
   .card h3{margin:0 0 8px;font-size:16px;font-weight:900}
@@ -436,6 +449,7 @@
 
 </body>
 </html>
+
 
 
 
